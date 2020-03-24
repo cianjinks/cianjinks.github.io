@@ -20,3 +20,19 @@ This challenge was another of the so-called simple challenges and simply acted a
 
 {: .box-note}
 **Flag:** HackTrinity{well_that_was_easy}
+
+### Trivia - Unknown
+
+This was the first of the trivia challenges. Once again it was another easy one as you were given a quote and upon googling that quote you would quickly come to the conclusion that it was said by Zero Cool from the movie Hackers. This flag was non standard format.
+
+{: .box-note}
+**Flag:** ZeroCool
+
+### Trivia - NotBotsAgain
+
+To some this challenge is commong knowledge but a quick google search will also tell you the answer. This flag was non standard format.
+
+{: .box-note}
+**Flag:** crossdomain.xml
+
+
