@@ -1,8 +1,11 @@
 ---
 layout: post
-published: false
 title: HackTrinity CTF Write Up
+subtitle: My first CTF
+tags: [ctf]
+comments: true
 ---
+
 This last week I took part in my first ever CTF and therefore felt it appropriate to follow that with a write up of my own. The CTF was a collaboration between various societies at my university and was known as HackTrinity. This is my first ever write up and details solutions to the various challenges I was able to solve throughout the competition.
 
 ## Challenges
