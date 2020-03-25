@@ -16,10 +16,10 @@ This was the first challenge in the competition and one of a few very simple one
 
 ### CHAD
 
-This challenge was another of the so-called simple challenges and simply acted as a tutorial for setting up the instances service used for some of the challenges.
+This challenge was another of the so-called simple challenges and simply acted as a tutorial for setting up the instances service used for some of the challenges. Once setup the flag is found by visiting the given URL.
 
 {: .box-note}
-**Flag:** HackTrinity{well_that_was_easy}
+**Flag:** HackTrinity{rutabaga_span_id_tortellini}
 
 ### Trivia - Unknown
 
