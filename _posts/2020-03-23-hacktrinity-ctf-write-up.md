@@ -2,8 +2,10 @@
 layout: post
 title: HackTrinity CTF Write Up
 subtitle: My first CTF
-tags: [ctf]
+tags:
+  - ctf
 comments: true
+published: true
 ---
 
 This last week I took part in my first ever CTF and therefore felt it appropriate to follow that with a write up of my own. The CTF was a collaboration between various societies at my university and was known as HackTrinity. This is my first ever write up and details solutions to the various challenges I was able to solve throughout the competition.
@@ -37,5 +39,18 @@ To some this challenge is commong knowledge but a quick google search will also 
 
 {: .box-note}
 **Flag:** crossdomain.xml
+
+### Reversing - Locked Out
+
+This was the first of the so-called _real_ challenges. You were presented with a simple binary that when ran produced the following output:
+
+![HackTrinity_Locked_Out1.JPG]({{site.baseurl}}/img/HackTrinity_Locked_Out1.JPG)
+
+
+
+
+
+
+
 
 
