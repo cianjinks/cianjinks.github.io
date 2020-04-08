@@ -46,9 +46,28 @@ This was the first of the so-called _real_ challenges. You were presented with a
 
 ![HackTrinity_Locked_Out1.JPG]({{site.baseurl}}/img/HackTrinity_Locked_Out1.JPG)
 
+As is customary my first thought was to test for a buffer overflow vulnerability by filling the input with a large amount of letters, but alas this did not cause any problems as I had hoped. (Little did I know I made a small mistake here that I wouldn't notice until after the competition had concluded)
 
+![HackTrinity_Locked_Out2.JPG]({{site.baseurl}}/img/HackTrinity_Locked_Out2.JPG)
 
+I knew the flag was likely in the binary and so my next idea was to simply try the "strings" command and grep for "HackTrinity" but once again this produced nothing. It seemed the flag was encrypted somehow within the binary. Finally I decided it was time to open up the binary in a disassembler for which I chose gdb as it was already installed on my ubuntu vm. After disassembling main I immediately noticed some functions which had proper names retrieved from the binary, most notable "enc_password", "decrypt", "print_flag" and "strcmp". Taking a look at the instruction calls it became clear that the binary encrypts the password taken in and then compares it against a decrypted password using the string compare function in C. 
 
+![HackTrinity_Locked_Out3.JPG]({{site.baseurl}}/img/HackTrinity_Locked_Out3.JPG)
+  
+My first thought was to somehow just modify the jump instruction at "0x0000000040001475" to always jump no matter the result of the string compare but after a bit of research this turned out to not be as easy as I thought it would be. I discovered that a jump instruction in x86 is encoded based on the offset it wishes to jump to and this made creating a new jump instruction a bit more difficult then I intended, however I would have likely tried had my next idea not worked out.
+
+Instead I chose to look into how the strcmp function worked in C by visiting its man page. As can be seen below it returns zero when the strings match. 
+
+![HackTrinity_Locked_Out4.JPG]({{site.baseurl}}/img/HackTrinity_Locked_Out4.JPG)
+
+After a little bit more research I discovered that the "test eax,eax" instruction after the strcmp function in the disassembled main is in fact where the program checks the result of strcmp. Thus I simply had to set a breakpoint at that instruction, modify eax to 0 and then continue. (Note that rax is eax on 64bit systems)
+
+![HackTrinity_Locked_Out5.JPG]({{site.baseurl}}/img/HackTrinity_Locked_Out5.JPG)
+
+Bam! We have the flag:
+
+{: .box-note}
+**Flag:** HackTrinity{h0w_cou1d_y0u_th3y_trusted_y0u}
 
 
 
