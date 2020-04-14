@@ -95,4 +95,25 @@ I was baffled. I was sure I had the right answer but alas this was not the case.
 {: .box-note}
 **Flag:** @HackTrinity19
 
+### Forensics - Panic
+
+This challenge gave you minimal information and a simple file called "bread.pdf". Upon opening it there is only one page with a picture of the empty bread isles in supermarkets due to coronavirus which I thought was a good homage to the current virus situation. I never really had any experience with the pdf format as a whole and so I began by searching for pdf virus analysis blogs online where I thought maybe some security researchers would make their own write ups on malicious pdf documents. My time spent searching led me to a tool called [peepdf](https://github.com/jesparza/peepdf) which is great for browsing the structure of a pdf document. After opening up "bread.pdf" in peepdf it gave me some information about the file such as the number of objects. It even helpfully labelled a suspicious element in object 8, however sadly there were no suspicious javascript elements as I had hoped there would be.
+
+![HackTrinity_Panic1.JPG]({{site.baseurl}}/img/HackTrinity_Panic1.JPG)
+
+I was quick to open up this suspicious object using the object command but all I got back was some giberrish I didn't know what to do with so before investigating that further I checked out every other object as well. Ultimately I only found one other object of note which was object 2 as it also had some gibberish hidden within it.
+
+![HackTrinity_Panic2.JPG]({{site.baseurl}}/img/HackTrinity_Panic2.JPG)
+![HackTrinity_Panic3.JPG]({{site.baseurl}}/img/HackTrinity_Panic3.JPG)
+
+I noted that the object 2 data was labelled as flate decode which I had heard of before as a compression algorithm. After a bit of messing around I realised the data is already decompressed as I was using the "object" command instead of "rawobject". The data still looked like gibberish to me though so I decided to start looking up some snippets of the string. A search online for "/Im4 Do Q" led me to realise ths data was in fact encoded text. As it turns out PDF's have their own way of encoding text into a document. I began researching this encoding to see if I could write a simple program to reverse it but after a bit of reading it became clear that such a task would not be so easy. After a little while of deliberating I realised I could probably use someone else's tool to extract the strings from a pdf document. After finding [this website](https://www.extractpdf.com/) it gave me the flag.
+
+![HackTrinity_Panic4.JPG]({{site.baseurl}}/img/HackTrinity_Panic4.JPG)
+
+{: .box-note}
+**Flag:** HackTrinity{th3_f1ag_supply_cha1ns_ar3_str0ng}
+
+(While the way I went about solving this was somewhat roundabout it was quite interesting to learn about the pdf file format overall so I have no regrets)
+
+
 
