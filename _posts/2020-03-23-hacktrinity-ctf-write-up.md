@@ -139,7 +139,7 @@ From the looks of things it opens a reverse connection on port 1337 to your mach
 
 ## The End
 
-That's it for all the challenges I was able to solve this time around! I attempted many others but never quie finished them, although I came quite close on some :( . I hope this write up was informative in some way or atleast will inspire others to try out CTFs as they really are quite a lot of fun. One problem I have is a feeling this write up wasn't worded overly well and comes across as some kind of first person report rather then a fun read, therefore I vow to come back and try fix that some time in the future. I hope you enjoyed and thanks for reading :D
+That's it for all the challenges I was able to solve this time around! I attempted many others but never quie finished them, although I came quite close on some :( . Ultimately I ended up placing 52nd which I'm pretty happy with although I definitely think I can do better in next year's. I hope this write up was informative in some way or atleast will inspire others to try out CTFs as they really are quite a lot of fun. One problem I have is a feeling this write up wasn't worded overly well and comes across as some kind of first person report rather then a fun read, therefore I vow to come back and try fix that some time in the future. I hope you enjoyed and thanks for reading :D
 
 
 
