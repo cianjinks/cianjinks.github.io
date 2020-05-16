@@ -163,7 +163,7 @@ As can be seen all that is needed is two right angled triangles joined together.
 ```java
 // Vertices - Positions
 float[] vertices = new float[] {
-	-1.0f,  1.0f,   // Vertex 0
+    -1.0f,  1.0f,   // Vertex 0
     -1.0f, -1.0f,   // Vertex 1
      1.0f, -1.0f,   // Vertex 2
      1.0f,  1.0f    // Vertex 3
@@ -256,7 +256,7 @@ private void loop() {
         GL30.glBindBuffer(GL30.GL_ARRAY_BUFFER, vboID);
         GL30.glBufferData(GL30.GL_ARRAY_BUFFER, vboBuffer, GL30.GL_STATIC_DRAW);
         GL30.glVertexAttribPointer(0, positionElementCount, GL_FLOAT, false, positionElementCount * Float.BYTES, 0);
-		GL30.glEnableVertexAttribArray(0);
+	GL30.glEnableVertexAttribArray(0);
   
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
@@ -269,7 +269,7 @@ private void loop() {
             // invoked during this call.
             glfwPollEvents();
         }
-    }
+}
 ```
 
 ## Index Buffers
@@ -371,7 +371,7 @@ private void loop() {
             // invoked during this call.
             glfwPollEvents();
         }
-    }
+}
 ```
 
 If we want, we can now go ahead and try drawing our square using one more line of code in our main window loop:
