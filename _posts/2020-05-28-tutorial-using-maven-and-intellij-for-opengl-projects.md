@@ -2,6 +2,12 @@
 layout: post
 published: false
 title: Tutorial - Using Maven and IntelliJ for OpenGL Projects
+tags:
+  - OpenGL
+  - LWJGL
+  - Maven
+comments: true
+published: true
 ---
 This tutorial will quickly cover how one can use Maven along with IntelliJ to get started with graphics programming using OpenGL. I originally wrote this so people could use it to directly follow along with my [Visualising the Mandelbrot Set Tutorial Series](https://cianjinks.github.io/2020-05-16-opengl-tutorial-visualizing-the-mandelbrot-set-fractal-part-1-of-2/) but I believe it is a great way to setup any OpenGL project in java. I use IntelliJ as my main IDE for programming Java and so that is what this tutorial will use, however others like eclipse will have an almost identical process with the only difference being the importing of the project. 
 
