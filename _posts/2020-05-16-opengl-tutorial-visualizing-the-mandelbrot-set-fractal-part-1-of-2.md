@@ -1,7 +1,13 @@
 ---
 layout: post
 published: false
-title: Untitled
+title: OpenGL Tutorial - Visualizing the Mandelbrot Set Fractal - Part 1 of 2
+tags:
+  - OpenGL
+  - LWJGL
+  - Fractal
+comments: true
+published: true
 ---
 
 Welcome to my first blog post/tutorial of many I hope to create on the topic of computer graphics programming using OpenGL. Over the past half a year or so I have been spending a large portion of my spare time teaching myself the ins and outs of the OpenGL api and in doing so have created some projects along the way. In this specific tutorial set I wanted to guide you through creating one of my earlier projects which I completed some time in January of 2020. That being a program which displays a stylised version of the [Mandelbrot Set](https://en.wikipedia.org/wiki/Mandelbrot_set) fractal pattern. I would have loved to have found all of this information condensed in one post when making it and so I hope this will be of benefit to you. In terms of the knowledge required to understand this tutorial, I wrote my programs in Java and would like this to be a tutorial one can learn from scratch with no prior OpenGL experience. I am going to attempt to explain the basic concepts in OpenGL as best I can meaning you will only need some experience with an object oriented programming language to understand it all. I will also regularly supply other sources for reading up on any concepts mentioned throughout. 
