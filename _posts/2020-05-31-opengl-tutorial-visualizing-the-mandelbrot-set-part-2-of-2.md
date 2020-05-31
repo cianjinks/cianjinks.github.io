@@ -1,7 +1,13 @@
 ---
 layout: post
 published: false
-title: OpenGL Tutorial - Visualizing the Mandelbrot Set - Part 2 of 2
+title: OpenGL Tutorial - Visualizing the Mandelbrot Set Fractal - Part 2 of 2
+tags:
+  - OpenGL
+  - LWJGL
+  - Fractal
+comments: true
+published: true
 ---
 This is part 2 of my tutorial series on Visualizing the Mandelbrot Set Fractal using OpenGL. This part will cover the creation of a camera for zooming in and out and moving around as well as the fragment shader responsible for generating the fractal. If you are interested in how to draw a square to the screen with shaders applied to it, check out [part one](https://cianjinks.github.io/2020-05-16-opengl-tutorial-visualizing-the-mandelbrot-set-fractal-part-1-of-2/). This part is going to continue from where we left off in part one (a simple square colored purple using shaders). 
 
