@@ -6,6 +6,7 @@ tags:
   - OpenGL
   - LWJGL
   - Maven
+  - Tutorial
 comments: true
 published: true
 ---
