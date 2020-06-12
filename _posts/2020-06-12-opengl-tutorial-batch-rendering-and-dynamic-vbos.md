@@ -2,6 +2,12 @@
 layout: post
 published: false
 title: OpenGL Tutorial - Batch Rendering and Dynamic VBOs
+tags:
+  - OpenGL
+  - LWJGL
+  - Tutorial
+comments: true
+published: true
 ---
 Hello and welcome to my second ever tutorial on computer graphics programming using OpenGL. My [previous tutorials](https://cianjinks.github.io/2020-05-16-opengl-tutorial-visualizing-the-mandelbrot-set-fractal-part-1-of-2/) covered many of the basics of OpenGL such as VBOs, IBOs, Shaders and MVP Matrices by implementing them in a Mandelbrot Set Fractal application. In that tutorial series we only ended up drawing a single quad to the screen which we then applied our Mandelbrot Fragment Shader to. If you remember, when supplying our data to our VBO using `glBufferData`, we specified for it to use `GL_STATIC_DRAW`. This meant that whatever data we placed there would not be changed again in the future. This data being the vertex attributes of our vertices, which in our case was their position.
 
