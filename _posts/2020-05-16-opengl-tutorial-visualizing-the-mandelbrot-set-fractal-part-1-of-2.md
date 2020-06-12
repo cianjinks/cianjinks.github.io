@@ -6,6 +6,7 @@ tags:
   - OpenGL
   - LWJGL
   - Fractal
+  - Tutorial
 comments: true
 published: true
 ---
