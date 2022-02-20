@@ -8,7 +8,7 @@ img_path: /assets/img/post/OpenGLMandelbrot/
 
 Welcome to my first blog post/tutorial of many I hope to create on the topic of computer graphics programming using OpenGL. Over the past half a year or so I have been spending a large portion of my spare time teaching myself the ins and outs of the OpenGL api and in doing so have created some projects along the way. In this specific tutorial set I wanted to guide you through creating one of my earlier projects which I completed some time in January of 2020. That being a program which displays a stylised version of the [Mandelbrot Set](https://en.wikipedia.org/wiki/Mandelbrot_set) fractal pattern. I would have loved to have found all of this information condensed in one post when making it and so I hope this will be of benefit to you. In terms of the knowledge required to understand this tutorial, I wrote my programs in Java and would like this to be a tutorial one can learn from scratch with no prior OpenGL experience. I am going to attempt to explain the basic concepts in OpenGL as best I can meaning you will only need some experience with an object oriented programming language to understand it all. I will also regularly supply other sources for reading up on any concepts mentioned throughout.
 
-(If you simply wish to learn how to create the Mandelbrot Set shader please check out [part two](https://cianjinks.github.io/2020-05-31-opengl-tutorial-visualizing-the-mandelbrot-set-part-2-of-2/) of this tutorial)
+(If you simply wish to learn how to create the Mandelbrot Set shader please check out [part two](https://cianjinks.github.io/posts/opengl-tutorial-visualizing-the-mandelbrot-set-part-2-of-2/) of this tutorial)
 
 One last thing before I dive right into the explanations is that a further updated and completed version of this project with all of the source code as well as compiled jars can be found over on my project's github page called [Mandelbrot-Viewer](https://github.com/cianjinks/MandelbrotViewer) so I encourage giving that a look too.
 
@@ -18,7 +18,7 @@ First things first for those who don't know, what is OpenGL? OpenGL aims to be a
 
 If you do want to follow this tutorial directly note that I selected the Minimal OpenGL configuration on LWJGL's [customize page](https://www.lwjgl.org/customize) and added the JOML math library addon. I also chose to use Maven for compiling my program and binaries. If you don't know how Maven works I will soon be writing a tutorial about setting up a Maven Java project for OpenGL programming and will use this tutorial as an example.
 
-**EDIT:** That tutorial can now be found [here](https://cianjinks.github.io/2020-05-28-tutorial-using-maven-and-intellij-for-opengl-projects/).
+**EDIT:** That tutorial can now be found [here](https://cianjinks.github.io/posts/tutorial-using-maven-and-intellij-for-opengl-projects/).
 
 ## The Window
 
@@ -595,6 +595,6 @@ private static String parseShaderFromFile(String filePath) {
 
 ## Part 2
 
-The [next part](https://cianjinks.github.io/2020-05-31-opengl-tutorial-visualizing-the-mandelbrot-set-part-2-of-2/) of this tutorial will cover some more advanced concepts such as how we can set up a simple camera using user input and an MVP Matrix (Model View Projection). That is also where we will write a fragment shader to visualize the Mandelbrot Set Fractal on our square and discuss some of its limitations. If you've already made it this far thanks so much for reading and I hope I was able to help you learn a bit along the way :D
+The [next part](https://cianjinks.github.io/posts/opengl-tutorial-visualizing-the-mandelbrot-set-part-2-of-2/) of this tutorial will cover some more advanced concepts such as how we can set up a simple camera using user input and an MVP Matrix (Model View Projection). That is also where we will write a fragment shader to visualize the Mandelbrot Set Fractal on our square and discuss some of its limitations. If you've already made it this far thanks so much for reading and I hope I was able to help you learn a bit along the way :D
 
 \- Cian Jinks

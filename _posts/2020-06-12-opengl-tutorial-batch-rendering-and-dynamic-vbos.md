@@ -5,7 +5,7 @@ categories: [Old]
 tags: [opengl, lwjgl, tutorial]
 img_path: /assets/img/post/OpenGLBatchRendering/
 ---
-Hello and welcome to my second ever tutorial on computer graphics programming using OpenGL. My [previous tutorials](https://cianjinks.github.io/2020-05-16-opengl-tutorial-visualizing-the-mandelbrot-set-fractal-part-1-of-2/) covered many of the basics of OpenGL such as VBOs, IBOs, Shaders and MVP Matrices by implementing them in a Mandelbrot Set Fractal application. In that tutorial series we only ended up drawing a single quad to the screen which we then applied our Mandelbrot Fragment Shader to. If you remember, when supplying our data to our VBO using `glBufferData`, we specified for it to use `GL_STATIC_DRAW`. This meant that whatever data we placed there would not be changed again in the future. This data being the vertex attributes of our vertices, which in our case was their position.
+Hello and welcome to my second ever tutorial on computer graphics programming using OpenGL. My [previous tutorials](https://cianjinks.github.io/posts/opengl-tutorial-visualizing-the-mandelbrot-set-fractal-part-1-of-2/) covered many of the basics of OpenGL such as VBOs, IBOs, Shaders and MVP Matrices by implementing them in a Mandelbrot Set Fractal application. In that tutorial series we only ended up drawing a single quad to the screen which we then applied our Mandelbrot Fragment Shader to. If you remember, when supplying our data to our VBO using `glBufferData`, we specified for it to use `GL_STATIC_DRAW`. This meant that whatever data we placed there would not be changed again in the future. This data being the vertex attributes of our vertices, which in our case was their position.
 
 As a result, we are unable to modify the position of our quad's vertices on the fly. So to get around this when we wanted to "move" our quad, we instead moved the "camera" which we created. Meaning the original vertex positions of our quad never changed. This works great when all we have is one quad however what if you wanted to have multiple quads in the same Vertex Buffer and move them all in different directions independent of each other? That's where dynamic vertex buffers and batch rendering comes into play.
 
@@ -17,7 +17,7 @@ Before we begin talking about Batch Rendering and making our Vertex Buffers dyna
 GL30.glDrawElements(GL30.GL_TRIANGLES, indices.length, GL_UNSIGNED_INT, 0);
 ```
 
-(If you don't understand the specific parameters of this function check out the [mandelbrot tutorial part 1](https://cianjinks.github.io/2020-05-16-opengl-tutorial-visualizing-the-mandelbrot-set-fractal-part-1-of-2/) or read about it on [docs.gl](http://docs.gl/))
+(If you don't understand the specific parameters of this function check out the [mandelbrot tutorial part 1](https://cianjinks.github.io/posts/opengl-tutorial-visualizing-the-mandelbrot-set-fractal-part-1-of-2/) or read about it on [docs.gl](http://docs.gl/))
 
 This function is called a "Draw Call" as we are telling the GPU to use the data we have given it to draw stuff to the screen. One way in which we could draw two quads with different positions would be to use multiple draw calls, moving our "camera" using an MVP Matrix in between like so (this code is incomplete but represents the idea):
 
@@ -39,7 +39,7 @@ This would in fact work. When we run such a program we should see two quads on o
 
 ## Batch Rendering
 
-To demonstrate how to implement batch rendering we are going to start a new project in which we render four quads together in one draw call with different positions each and also different colors. Just like in the Mandelbrot Tutorials I am going to be using [LWJGL](https://www.lwjgl.org/) for my OpenGL bindings and therefore programming in Java. If you wish to follow along directly with this tutorial I wrote another on how to setup a project exactly like mine [here](https://cianjinks.github.io/2020-05-28-tutorial-using-maven-and-intellij-for-opengl-projects/). To get started I will create a file called `Application.java` and paste in the starter code from LWJGL's [starter page](https://www.lwjgl.org/guide). If you're wondering what this code does I once again already discussed it in part one of the Mandelbrot Tutorial Series.
+To demonstrate how to implement batch rendering we are going to start a new project in which we render four quads together in one draw call with different positions each and also different colors. Just like in the Mandelbrot Tutorials I am going to be using [LWJGL](https://www.lwjgl.org/) for my OpenGL bindings and therefore programming in Java. If you wish to follow along directly with this tutorial I wrote another on how to setup a project exactly like mine [here](https://cianjinks.github.io/posts/tutorial-using-maven-and-intellij-for-opengl-projects/). To get started I will create a file called `Application.java` and paste in the starter code from LWJGL's [starter page](https://www.lwjgl.org/guide). If you're wondering what this code does I once again already discussed it in part one of the Mandelbrot Tutorial Series.
 
 (Before writing any new OpenGL code I will simply set a few variables such as the window resolution to 480x480 as well as title to "Batch Rendering Tutorial")
 

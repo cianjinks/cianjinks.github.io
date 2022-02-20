@@ -5,7 +5,7 @@ categories: [Old]
 tags: [opengl, lwjgl, maven, tutorial]
 img_path: /assets/img/post/MavenTutorial/
 ---
-This tutorial will quickly cover how one can use Maven along with IntelliJ to get started with graphics programming using OpenGL. I originally wrote this so people could use it to directly follow along with my [Visualising the Mandelbrot Set Tutorial Series](https://cianjinks.github.io/2020-05-16-opengl-tutorial-visualizing-the-mandelbrot-set-fractal-part-1-of-2/) but I believe it is a great way to setup any OpenGL project in java. I use IntelliJ as my main IDE for programming Java and so that is what this tutorial will use, however others like eclipse will have an almost identical process with the only difference being the importing of the project.
+This tutorial will quickly cover how one can use Maven along with IntelliJ to get started with graphics programming using OpenGL. I originally wrote this so people could use it to directly follow along with my [Visualising the Mandelbrot Set Tutorial Series](https://cianjinks.github.io/posts/opengl-tutorial-visualizing-the-mandelbrot-set-fractal-part-1-of-2/) but I believe it is a great way to setup any OpenGL project in java. I use IntelliJ as my main IDE for programming Java and so that is what this tutorial will use, however others like eclipse will have an almost identical process with the only difference being the importing of the project.
 
 **Prerequisite:** Install [Maven](https://maven.apache.org/download.cgi) for your specific OS before following this tutorial.
 
@@ -305,7 +305,7 @@ Running our program in IntelliJ works the very same as usual. Simply create a ru
 
 ## Compiling to JAR file
 
-**NOTE:** For this section of the tutorial I replaced `Application.java` with the `Application.java` that we left off with in Part 1 of the [Mandelbrot Set Tutorial Series](https://cianjinks.github.io/2020-05-16-opengl-tutorial-visualizing-the-mandelbrot-set-fractal-part-1-of-2/) and brought our shaders over into the resources folder. This means we are now essentially working as if this project is the one from the tutorial.
+**NOTE:** For this section of the tutorial I replaced `Application.java` with the `Application.java` that we left off with in Part 1 of the [Mandelbrot Set Tutorial Series](https://cianjinks.github.io/posts/opengl-tutorial-visualizing-the-mandelbrot-set-fractal-part-1-of-2/) and brought our shaders over into the resources folder. This means we are now essentially working as if this project is the one from the tutorial.
 
 When you want to distribute your java project it is common to package it all into a single jar file which can then be ran by people cross platform. Maven makes this incredibly easy to accomplish as it comes with some inbuilt commands for doing so. You can run any of these commands from the `Maven` tab on the right side of the IntelliJ window:
 

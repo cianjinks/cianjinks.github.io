@@ -5,7 +5,7 @@ categories: [Old]
 tags: [opengl, lwjgl, fractal, tutorial]
 img_path: /assets/img/post/OpenGLMandelbrot/
 ---
-This is part 2 of my tutorial series on Visualizing the Mandelbrot Set Fractal using OpenGL. This part will cover the creation of a camera for zooming in and out and moving around as well as the fragment shader responsible for generating the fractal. If you are interested in how to draw a square to the screen with shaders applied to it, check out [part one](https://cianjinks.github.io/2020-05-16-opengl-tutorial-visualizing-the-mandelbrot-set-fractal-part-1-of-2/). This part is going to continue from where we left off in part one (a simple square colored purple using shaders).
+This is part 2 of my tutorial series on Visualizing the Mandelbrot Set Fractal using OpenGL. This part will cover the creation of a camera for zooming in and out and moving around as well as the fragment shader responsible for generating the fractal. If you are interested in how to draw a square to the screen with shaders applied to it, check out [part one](https://cianjinks.github.io/posts/opengl-tutorial-visualizing-the-mandelbrot-set-fractal-part-1-of-2/). This part is going to continue from where we left off in part one (a simple square colored purple using shaders).
 
 ## The Camera
 
@@ -41,7 +41,7 @@ try (MemoryStack stack = MemoryStack.stackPush()) {
 
 Note that this example uses correct LWJGL memory management practices as mentioned on the JOML [README](https://github.com/JOML-CI/JOML) by first placing our matrix in a FloatBuffer before passing it as the data for our uniform. If you wish to read the documentation for a `Matrix4f` it can be found [here](https://joml-ci.github.io/JOML/apidocs/org/joml/Matrix4f.html).
 
-The first of these OpenGL functions is `glGetUniformLocation`. This takes in the shader's program ID which already exists in our program as well what you wish to call this uniform's variable. In my case I like to use the convention of "u_Something" when naming uniforms. This function then returns us an Integer which we can use to reference this uniform later on. Next we use `glUniformMatrix4fv` and pass it this Integer. This tells OpenGL we want this uniform to be a 4\*4 square matrix of floats. After that we pass it `false` so that it does not transpose the matrix (this can be necessary as other graphics apis like DirectX use different matrix ordering in memory) and finally we pass in our FloatBuffer which contains our projection matrix. This code should be placed in the main loop of the program, as we will want to be able to update the matrix to move the camera around every frame. If you want to learn more about any of these OpenGL functions, just like in [part one](https://cianjinks.github.io/2020-05-16-opengl-tutorial-visualizing-the-mandelbrot-set-fractal-part-1-of-2/), I highly recommend checking out [docs.gl](http://docs.gl/).
+The first of these OpenGL functions is `glGetUniformLocation`. This takes in the shader's program ID which already exists in our program as well what you wish to call this uniform's variable. In my case I like to use the convention of "u_Something" when naming uniforms. This function then returns us an Integer which we can use to reference this uniform later on. Next we use `glUniformMatrix4fv` and pass it this Integer. This tells OpenGL we want this uniform to be a 4\*4 square matrix of floats. After that we pass it `false` so that it does not transpose the matrix (this can be necessary as other graphics apis like DirectX use different matrix ordering in memory) and finally we pass in our FloatBuffer which contains our projection matrix. This code should be placed in the main loop of the program, as we will want to be able to update the matrix to move the camera around every frame. If you want to learn more about any of these OpenGL functions, just like in [part one](https://cianjinks.github.io/posts/opengl-tutorial-visualizing-the-mandelbrot-set-fractal-part-1-of-2/), I highly recommend checking out [docs.gl](http://docs.gl/).
 
 Finally we are going to head on over to our Vertex Shader called `vert.shader` and add in a small bit of extra code to make use of this projection matrix:
 
@@ -873,7 +873,7 @@ vec2 squareImaginary(vec2 imaginaryNum) {
 }
 ```
 
-(If you want to get better at using GLSL I recommend [this](https://www.youtube.com/watch?v=HIvNePu7UEE&list=PL4neAtv21WOmIrTrkNO3xCyrxg4LKkrF7) video series which I mentioned in [part one](https://cianjinks.github.io/2020-05-16-opengl-tutorial-visualizing-the-mandelbrot-set-fractal-part-1-of-2/))
+(If you want to get better at using GLSL I recommend [this](https://www.youtube.com/watch?v=HIvNePu7UEE&list=PL4neAtv21WOmIrTrkNO3xCyrxg4LKkrF7) video series which I mentioned in [part one](https://cianjinks.github.io/posts/opengl-tutorial-visualizing-the-mandelbrot-set-fractal-part-1-of-2/))
 
 Then in our main line we can use it to generate a black and white version of the Mandelbrot Set:
 
@@ -1023,7 +1023,7 @@ One final challenge would be to create an infinite zoom. Some online resources d
 
 ## Conclusion
 
-That's it for the tutorial series! If you came all the way from the beginning, thanks so much for reading all the way through and even if you didn't thanks so much for reading in general. I hope my explanations were clear and well understood. If you did note any problems leave a comment so I can possibly make some additions or changes in the future. As I mentioned in [part one](https://cianjinks.github.io/2020-05-16-opengl-tutorial-visualizing-the-mandelbrot-set-fractal-part-1-of-2/) if you want to check out my original version of this project it can be found on my [github](https://github.com/cianjinks/MandelbrotViewer). (This version has an implemented UI and settings and as well as that a lot of concepts covered here such as the Camera are abstracted into their own classes)
+That's it for the tutorial series! If you came all the way from the beginning, thanks so much for reading all the way through and even if you didn't thanks so much for reading in general. I hope my explanations were clear and well understood. If you did note any problems leave a comment so I can possibly make some additions or changes in the future. As I mentioned in [part one](https://cianjinks.github.io/posts/opengl-tutorial-visualizing-the-mandelbrot-set-fractal-part-1-of-2/) if you want to check out my original version of this project it can be found on my [github](https://github.com/cianjinks/MandelbrotViewer). (This version has an implemented UI and settings and as well as that a lot of concepts covered here such as the Camera are abstracted into their own classes)
 
 \- Cian Jinks
 
