@@ -1,6 +1,6 @@
 ---
 title: OpenGL Tutorial - Batch Rendering and Dynamic VBOs
-date: 2020-05-31 12:00:00 +0000
+date: 2020-06-12 12:00:00 +0000
 categories: [Old]
 tags: [opengl, lwjgl, tutorial]
 img_path: /assets/img/post/OpenGLBatchRendering/
