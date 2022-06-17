@@ -573,7 +573,8 @@ int main(void)
 ```
 {: file='/src/Main.cpp'}
 
-![ImGui_Window.png](ImGui_Window.png)
+![ImGui_Window_Linux.png](ImGui_Window_Linux.png)
+![ImGui_Window_Windows.png](ImGui_Window_Windows.png)
 
 If everything goes as planned you should see the usual GLFW window with a demo ImGui window inside which you can mess around with, as well as some console output to show that GLM and stb_image are working.
 
