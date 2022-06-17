@@ -7,18 +7,19 @@ img_path: /assets/img/post/CMakeProject/
 ---
 A while back I found myself switching to Linux as my main development environment for college work. Up until that point I had been spending sporadic free time learning graphics programming on Windows using Visual Studio and wanted to port over some of my projects. I thought CMake would be the best route as it was extensively used by other graphics projects on Github and is well maintained.
 
-However, it took me quite a while to figure out how to get a project setup with all of my usual libraries (GLFW, GLM, ImGui, more), as there was no clear tutorial I could find. Now that I've had it working for some time, I thought I'd take a stab at writing my own. If you're not interested in reading how it all is setup, and just would like a project template, checkout this [Github template](https://github.com/cianjinks/CMake-OpenGL-Template).
+However, it took me quite a while to figure out how to get a project setup with all of my usual libraries (GLFW, GLM, ImGui, more). There was no clear tutorial I could find. Eventually I got it working and thought I'd take a stab at writing my own. If you're not interested in reading how it works in detail, and just would like a project template, checkout this [Github repository](https://github.com/cianjinks/CMake-OpenGL-Template).
 
 ## Plan
 
 For this tutorial I am imagining a hypothetical scenario where I want to start a new graphics programming project which I can run on both Linux and Windows. My project is going to use OpenGL for graphics and various other libraries:
 
+- [GLAD](https://glad.dav1d.de/) for modern OpenGL bindings
 - [ImGui](https://github.com/ocornut/imgui) for GUI
 - [GLFW](https://www.glfw.org/) for cross platform window management
-- [GLM](https://github.com/g-truc/glm) for math
+- [GLM](https://github.com/g-truc/glm) for vector and matrix maths
 - [stb_image](https://github.com/nothings/stb/blob/master/stb_image.h) for texture loading
 
-With the information in this article (and perhaps a little more research) you should be able to understand how to add more of your own libraries, support MacOS and other platforms and potentially setup a similar project for Vulkan, DirectX, Metal, etc programming.
+With the information in this article (and perhaps a little more research) you should be able to understand how to add more of your own libraries, potentially setup a similar project for Vulkan, DirectX, Metal, etc and maybe even support MacOS and other platforms.
 
 ## Project Structure
 
@@ -33,19 +34,18 @@ CMake-Graphics-Project
 │   ├── glm
 │   ├── imgui
 │   └── stb_image
-├── README.md
 ├── resources
 └── src
     └── Main.cpp
 ```
 
-We start off by creating our main project folder called `Cmake-Graphics-Project`. We then also create a few subfolders:
+We start off by creating our main project folder called `CMake-Graphics-Project`. We then also create a few subfolders:
 
 - `dependencies` is where we will put the libraries for our project
 - `resources` is where we will put resources like textures, shaders, etc
 - `src` is where our source code will be
 
-For now I will keep these folders empty, except a `Main.cpp` file in `src` with the following contents:
+For now I will keep these folders empty, except for a `Main.cpp` file in `src` with the following contents:
 
 ```cpp
 #include <iostream>
@@ -57,11 +57,9 @@ int main()
 ```
 {: file='/src/Main.cpp'}
 
-I have also added a simple `README.md` for Github.
-
 ## Initial CMake Setup
 
-The last and most important file of the initial setup is the `CMakeLists.txt`. This is the file which configures our CMake project. I will start by creating a simple one so that we can compile our test Main program while we have no dependencies or resources. Before we start you will need to install [CMake](https://cmake.org/download/) and a C and C++ compiler (if you have Visual Studio installed on Windows you already have a compiler). If you are on Windows also make sure to tick to add CMake to PATH so that it can be used from the command line. Linux should do this automatically.
+The most important file of the initial setup is the `CMakeLists.txt`. This is the file which configures our CMake project. I will start by creating a simple one so that we can compile our test `Main.cpp` program while we have no dependencies or resources. Before we start you will need to install [CMake](https://cmake.org/download/) and a C and C++ compiler (if you have Visual Studio installed on Windows you already have a compiler). If you are on Windows also make sure to tick to add CMake to PATH so that it can be used from the command line. Linux should do this automatically.
 
 With CMake installed we can check if it's working from the command line like so:
 
@@ -71,7 +69,7 @@ cmake version 3.23.2
 CMake suite maintained and supported by Kitware (kitware.com/cmake).
 ```
 
-Now that it's working we can start writing our `CMakeLists.txt`. The first few lines of nearly every CMakeLists define the CMake minimum version and declare a project with name. In this case we are naming it `CMakeGraphicsProject` but it could be anything you want:
+Now that it's working we can start writing our `CMakeLists.txt`. The first few lines of nearly every CMakeLists define the CMake minimum version and declare a project with a name. In this case we are naming it `CMakeGraphicsProject` but it could be anything you want:
 
 ```cmake
 cmake_minimum_required(VERSION 3.3)
@@ -88,7 +86,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 ```
 {: file='CMakeLists.txt'}
 
-Finally we need to define an executable to compile and add our code (`.cpp`) and header files (`.h`) to it. We can use a neat trick to gather all `.cpp` and `.h` files under `./src` into one variable called `source`. Then we just need to add the `source` variable to the executable.
+Finally we need to define an executable to compile our code (`.cpp`) and header files (`.h`) into. We can use a neat trick to gather all `.cpp` and `.h` files under `./src` into one variable called `source`. Then we just need to add the `source` variable to the executable.
 
 ```cmake
 # Set `source` variable to all .h and .cpp files in `src`
@@ -102,7 +100,7 @@ That's it for now. We should be able to build and run our simple project next.
 
 ## Initial CMake Building
 
-Before we build our executable we need to do some more CMake setup. Create a folder called `build`, change directory into it and run `cmake ../` from a commandline. On Linux I do this all from the commandline:
+Before we build our executable we need to do some more CMake setup. Create a folder called `build`, change directory into it and run `cmake ../` from a commandline. On Linux I do this like so:
 
 ```console
 $ mkdir build
@@ -125,7 +123,7 @@ $ cmake ../
 -- Build files have been written to: /home/hobbes/Documents/Graphics/CMake-Graphics-Project/build
 ```
 
-This is where things differ between Linux and Windows. On Windows you will now find a Visual Studio solution file (`.sln`) in the `./build` folder which you can open in Visual Studio and use as normal (build, run, debug, etc). However on Linux we need one more command to build the executable.
+This is where things differ between Linux and Windows. On Windows you will now find a Visual Studio solution file (`.sln`) in the `./build` folder which you can open in Visual Studio and use as normal (build, run, debug, etc) (remember to set the startup project to CMakeGraphicsProject before hitting run!). However on Linux we need to use one more command to build the executable.
 
 ```console
 $ cmake --build ./
@@ -156,7 +154,7 @@ target_link_libraries(CMakeGraphicsProject ${OPENGL_LIBRARIES})
 ```
 {: file='CMakeLists.txt'}
 
-These lines tell CMake to include and link basic built-in system OpenGL functionality. However, we still do not have modern OpenGL support nor an easy cross platform way to create a window. To get these working we are going to need to introduce two dependencies. `GLAD` for modern OpenGL bindings and `GLFW` for window management.
+These lines tell CMake to include and link basic built-in system OpenGL functionality. However, we still do not have modern OpenGL support nor an easy cross platform way to create a window. To get these working we are going to need to introduce two dependencies. **GLAD** for modern OpenGL bindings and **GLFW** for window management.
 
 ### Setting up GLAD
 
@@ -303,7 +301,7 @@ int main(void)
 ```
 {: file='/src/Main.cpp'}
 
-Now we can build and run our project. On Windows we would do this within the VS solution (remember to set the startup project to CMakeGraphicsProject before hitting run!), but on Linux I will use the same command as before:
+Now we can build and run our project. On Windows we would do this within the VS solution, but on Linux I will use the same command as before:
 
 ```console
 $ cmake --build ./build
@@ -319,11 +317,11 @@ Our current CMake setup is enough to get started graphics programming with OpenG
 
 ## Adding Extra Libraries
 
-The three last libraries I am going to add to this project are [ImGui](https://github.com/ocornut/imgui) for easy GUI setup, [stb_image](https://github.com/nothings/stb/blob/master/stb_image.h) for texture loading and [GLM](https://github.com/g-truc/glm) for mathematics. ImGui is significantly more complex to add to a CMake project so we are going to start with `stb_image` and `GLM`.
+The three last libraries I am going to add to this project are [ImGui](https://github.com/ocornut/imgui) for easy GUI setup, [stb_image](https://github.com/nothings/stb/blob/master/stb_image.h) for texture loading and [GLM](https://github.com/g-truc/glm) for mathematics. ImGui is significantly more complex to add to a CMake project so we are going to start with stb_image and GLM.
 
 ### Setting up stb_image
 
-`stb_image` is a single header library for loading textures (png, jpg, etc) into memory for use with OpenGL. To start we need to download the [stb_image.h](https://github.com/nothings/stb/blob/master/stb_image.h) header and setup a dependencies folder for it. The folder will have the following structure:
+stb_image is a single header library for loading textures (png, jpg, etc) into memory for use with OpenGL. To start we need to download the [stb_image.h](https://github.com/nothings/stb/blob/master/stb_image.h) header and setup a dependencies folder for it. The folder will have the following structure:
 
 ```
 stb_image
@@ -341,7 +339,7 @@ As you can see I have added a file called `stb_image_impl.c` (stb_image implemen
 ```
 {: file='/dependencies/stb_image/stb_image_impl.c'}
 
-Our `CMakeLists.txt` looks nearly identical to the one we created for `GLAD` because we once again just need to create a static library with `.c` and `.h` files:
+Our `CMakeLists.txt` looks nearly identical to the one we created for GLAD because we once again just need to create a static library with `.c` and `.h` files:
 
 ```cmake
 cmake_minimum_required(VERSION 3.3)
@@ -368,7 +366,7 @@ target_link_libraries(CMakeGraphicsProject ${OPENGL_LIBRARIES} glad glfw stb_ima
 
 ### Setting up GLM
 
-`GLM` is a math library for OpenGL which implements various useful datastructures like vectors and matrices, as well as various operations for doing calculations using those datastructures. To get started we need to download the latest release ZIP from [Github](https://github.com/g-truc/glm/releases/). `GLM`'s structure is nearly identical to `GLFW`'s and so the process for adding it to our CMake project is also basically the same.
+GLM is a math library for OpenGL which implements various useful datastructures like vectors and matrices, as well as various operations for doing calculations using those datastructures. To get started we need to download the latest release ZIP from [Github](https://github.com/g-truc/glm/releases/). GLM's structure is nearly identical to GLFW's and so the process for adding it to our CMake project is also basically the same.
 
 First we extract it to the folder `dependencies/glm` so that we get a structure like the following:
 
@@ -415,9 +413,9 @@ target_link_libraries(CMakeGraphicsProject ${OPENGL_LIBRARIES} glad glfw stb_ima
 
 ### Setting up ImGui
 
-`ImGui` is a library that makes OpenGL GUI incredibly quick and easy to implement. It allows us to add all kinds of UI buttons, sliders, settings, etc with very few lines of code. It is highly confiurable and works with a large number of graphics pipelines so it will take some fiddling to get it setup in our CMake project.
+ImGui is a library that makes OpenGL GUI incredibly quick and easy to implement. It allows us to add all kinds of UI buttons, sliders, settings, etc with very few lines of code. It is highly configurable and works with a large number of graphics pipelines so it will take some fiddling to get it setup in our CMake project.
 
-As per usual, the  first thing we need to do is head over to the ImGui Github [releases page](https://github.com/ocornut/imgui/releases/) and download the latest release. At the time of writing there is no specific release ZIP, so you need to just download the source code ZIP. With it download we need to extract the contents into `dependencies/imgui` so that we end up with a structure like so:
+As per usual, the  first thing we need to do is head over to the ImGui Github [releases page](https://github.com/ocornut/imgui/releases/) and download the latest release. At the time of writing there is no specific release ZIP, so you need to just download the source code ZIP. With it downloaded we need to extract the contents into `dependencies/imgui` so that we end up with a structure like so:
 
 ```
 imgui
@@ -449,7 +447,7 @@ imgui
 
 As you can see, ImGui does not come with a `CMakeLists.txt` file and this is because it can support so many different platforms and graphics pipelines that they expect you to simply include the headers and source files that you need from it.
 
-Therefore, in our main `CMakeLists.txt` we are going to pull in various useful header files from ImGui for GLFW and OpenGL3 support as well as general ImGui sources and headers. Just after where we define our C++ standard place the following:
+Therefore, in our main `CMakeLists.txt` we are going to pull in various useful header files from ImGui for GLFW and OpenGL3 support, as well as general ImGui sources and headers. Just after where we define our C++ standard place the following:
 
 ```cmake
 # ImGui
@@ -583,7 +581,7 @@ You might be wondering why I am using a global filepath for the `.png` image. We
 
 ## Resources
 
-The final piece of the puzzle to complete our CMake project is our resources folder. This folder sits in the top level of our project and is where I would put any textures, shaders, text files, json files, etc that I might want to use within my code. However, depending on where you use cmake to build your project the executable will move around the place. This means that using relative file paths within the code will likely not work. To solve this issue, we want our resources folder to always end up in the same folder as the executable. This will allow us to use filepaths like "resources/shaders/test.glsl" from within our code. But how do we do this?
+The final piece of the puzzle to complete our CMake project is our resources folder. This folder sits in the top level of our project and is where I would put any textures, shaders, text files, json files, etc that I might want to use within my code. However, depending on where you use cmake to build your project, the executable will move around the place. This means that using relative file paths within the code will likely not work. To solve this issue, we want our resources folder to always end up in the same folder as the executable. This will allow us to use filepaths like "./resources/shaders/test.glsl" from within our code. But how do we do this?
 
 We _could_ tell CMake to copy our resources folder to the executable output directory like so:
 
@@ -599,7 +597,7 @@ However, the issue with this approach is when you start having gigabytes of reso
 add_custom_command(TARGET CMakeGraphicsProject PRE_BUILD COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_CURRENT_SOURCE_DIR}/resources $<TARGET_FILE_DIR:CMakeGraphicsProject>/resources)
 ```
 
-A symlink is essentially a folder that points to another folder. They are enabled by default on both Windows and Linux. If you place this at the bottom of your `CMakeLists.txt` then instead of loading the texture in `Main.cpp` from "/home/hobbes/Documents/Graphics/CMake-Graphics-Project/resources/test_image.png", you can just load it like so:
+A symlink is essentially a folder that points to another folder. They are enabled by default on both Windows and Linux. If you place this at the bottom of your `CMakeLists.txt` then instead of loading the texture in `Main.cpp` from `/home/hobbes/Documents/Graphics/CMake-Graphics-Project/resources/test_image.png`, you can just load it like so:
 
 ```cpp
 unsigned char *image = stbi_load("./resources/test_image.png", &w, &h, &nrChannels, STBI_default);
@@ -607,7 +605,7 @@ unsigned char *image = stbi_load("./resources/test_image.png", &w, &h, &nrChanne
 
 ## Wrap
 
-And that's it. We now have what I would consider a fully configured CMake project for cross platform graphics programming. I found it quite a headache when I initially tried to get a CMake project working for this purpose so if this guide was able to help you solve at least one problem you've been having then it was worth writing!
+And that's it. We now have what I would consider a fully configured CMake project for cross platform graphics programming with OpenGL. I found it quite a headache when I initially tried to get a CMake project working for this purpose so if this guide was able to help you solve at least one problem you've been having then it was worth writing!
 
 If you would like to checkout the finished working version of this project it can be found on Github at [this link](https://github.com/cianjinks/CMake-OpenGL-Template). This version has a few extra files like a README and linux/windows setup scripts. It also has some extra CMake settings for address sanitizer and GLFW flags.
 
